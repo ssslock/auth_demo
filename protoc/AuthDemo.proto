@@ -1,0 +1,44 @@
+package authdemo;
+
+option java_package = "com.example.authdemo";
+option java_outer_classname = "AuthDemoProtos";
+
+message RegCheckRequest {
+    required string userName = 1;
+}
+
+message RegCheckRespond {
+	required int32 status = 1;	//0: OK, -1: used
+}
+
+message RegRequest {
+	required string userName = 1;
+	repeated fixed32 partitionArg = 2;
+	repeated fixed32 hashSalt = 3;
+	repeated fixed32 keyHash = 4;
+}
+
+message RegRespond {
+	required int32 status = 1;	//0: OK, -1: fail
+}
+
+message AuthRequest {
+	required string userName = 1;
+}
+
+message AuthQ {
+	required int32 status = 1;	//0: OK, -1: username do not exist
+	optional int32 sessionId = 2;
+	repeated fixed32 partitionArg = 3;
+	repeated fixed32 hashSalt = 4;
+}
+
+message AuthA {
+	required int32 sessionId = 1;
+	repeated fixed32 randomSalt = 2;
+	repeated fixed32 keyHash = 3;
+}
+
+message AuthRespond {
+	required int32 status = 1;	//0: OK, -1: fail
+}
